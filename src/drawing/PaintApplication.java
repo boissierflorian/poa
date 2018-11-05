@@ -11,6 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import javax.tools.Tool;
+
 /**
  * Created by lewandowski on 20/12/2017.
  */
@@ -29,6 +31,7 @@ public class PaintApplication extends Application {
     private Button triangleButton;
     private Button delButton;
 
+    private ToolBar toolBar;
     private StatutBar statutBar;
 
     @Override
@@ -49,24 +52,8 @@ public class PaintApplication extends Application {
 
         drawingPane.getStyleClass().add("drawingPane");
         root.setCenter(drawingPane);
-
-        HBox hBox = new HBox();
-        clearButton = new Button("Clear");
-        clearButton.setOnAction(event -> drawingPane.clear());
-        rectangleButton = new Button("Rectangle");
-        rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
-        circleButton = new Button("Circle");
-        circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
-        triangleButton = new Button("Triangle");
-        triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
-        delButton = new Button("Delete");
-        delButton.setOnMouseClicked(mouseEvent -> drawingPane.removeSelectedShapes());
-
-        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton, delButton);
-        hBox.setPadding(new Insets(5));
-        hBox.setSpacing(5.0);
-        hBox.getStyleClass().add("toolbar");
-        root.setTop(hBox);
+        toolBar = new ToolBar(drawingPane);
+        root.setTop(toolBar.build());
 
         statutBar = new StatutBar();
         statutBar.setPadding(new Insets(10));
