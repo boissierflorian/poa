@@ -75,6 +75,7 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, S
 
         selectionHandler.getSelectedShapes().clear();
 
+        notifyObservers(this, shapes.size());
         notifySelectionToObservers(0);
     }
 
