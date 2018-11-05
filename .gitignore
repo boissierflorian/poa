@@ -25,4 +25,6 @@ out/*
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
->>>>>>> 2f1bdc507546b4a5df3c441b5bea71c75f27d5b0
+
+# Intellij
+*.iml
