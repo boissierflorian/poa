@@ -16,7 +16,17 @@ public class ButtonFactory {
     public static final String CIRCLE_BUTTON = "circle";
     public static final String DELETE_BUTTON = "delete";
 
-    private static ImageView getImageView(String buttonName) {
+    public static final int TEXT_ONLY = 0;
+    public static final int ICONS_ONLY = 1;
+
+    private int style;
+
+    public ButtonFactory(int style) {
+        this.style = style;
+    }
+
+
+    private ImageView getImageView(String buttonName) {
         Image image = null;
 
         try {
@@ -29,8 +39,8 @@ public class ButtonFactory {
         return new ImageView(image);
     }
 
-    public static Button createButton(String buttonName) {
-        Button b = new Button(buttonName, getImageView(buttonName));
+    public  Button createButton(String buttonName) {
+        Button b = new Button(style == ICONS_ONLY ? "" : buttonName, style == ICONS_ONLY ? getImageView(buttonName) : null);
         b.setTooltip(new Tooltip(buttonName));
         return b;
     }
