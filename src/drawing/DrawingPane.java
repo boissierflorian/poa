@@ -67,7 +67,7 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, S
         notifyObservers(this, shapes.size());
     }
 
-    public synchronized void removeSelectedShapes() {
+    public  void removeSelectedShapes() {
         shapes.removeAll(selectionHandler.getSelectedShapes());
 
         this.getChildren().removeAll(selectionHandler.getSelectedShapes()
