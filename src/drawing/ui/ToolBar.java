@@ -16,17 +16,16 @@ public class ToolBar {
     private Button triangleButton;
     private Button delButton;
 
-
     public ToolBar(DrawingPane drawingPane) {
-        clearButton = new Button("Clear");
+        clearButton = ButtonFactory.createButton(ButtonFactory.CLEAR_BUTTON);
         clearButton.setOnAction(event -> drawingPane.clear());
-        rectangleButton = new Button("Rectangle");
+        rectangleButton = ButtonFactory.createButton(ButtonFactory.RECTANGLE_BUTTON);
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
-        circleButton = new Button("Circle");
+        circleButton = ButtonFactory.createButton(ButtonFactory.CIRCLE_BUTTON);
         circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
-        triangleButton = new Button("Triangle");
+        triangleButton = ButtonFactory.createButton(ButtonFactory.TRIANGLE_BUTTON);
         triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
-        delButton = new Button("Delete");
+        delButton = ButtonFactory.createButton(ButtonFactory.DELETE_BUTTON);
         delButton.setOnMouseClicked(mouseEvent -> drawingPane.removeSelectedShapes());
     }
 
