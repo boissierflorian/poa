@@ -1,7 +1,9 @@
-package drawing;
+package drawing.handlers;
 
+import drawing.ui.DrawingPane;
+import drawing.shapes.IShape;
+import drawing.shapes.ShapeAdapter;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 /**
  * Created by lewandowski on 20/12/2017.

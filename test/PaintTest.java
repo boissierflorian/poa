@@ -1,11 +1,7 @@
-import drawing.IShape;
-import drawing.PaintApplication;
-import javafx.geometry.Point2D;
-import javafx.scene.input.KeyCode;
+import drawing.shapes.IShape;
+import drawing.ui.PaintApplication;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;

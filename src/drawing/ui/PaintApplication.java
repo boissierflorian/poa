@@ -1,17 +1,15 @@
-package drawing;
+package drawing.ui;
 
+import drawing.observable.Observer;
+import drawing.observable.SelectionObserver;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import javax.tools.Tool;
 
 /**
  * Created by lewandowski on 20/12/2017.
@@ -46,7 +44,7 @@ public class PaintApplication extends Application {
         });
 
         root.getStylesheets().add(
-                PaintApplication.class.getResource("./Paint.css").toExternalForm());
+                PaintApplication.class.getResource("../css/Paint.css").toExternalForm());
 
         drawingPane = new DrawingPane();
 

@@ -1,6 +1,13 @@
-package drawing;
+package drawing.ui;
 
-import javafx.scene.Node;
+import drawing.handlers.MouseMoveHandler;
+import drawing.handlers.SelectionHandler;
+import drawing.observable.Observable;
+import drawing.observable.Observer;
+import drawing.observable.SelectionObservable;
+import drawing.observable.SelectionObserver;
+import drawing.shapes.IShape;
+import drawing.shapes.ShapeAdapter;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;

@@ -1,4 +1,4 @@
-package drawing;
+package drawing.shapes;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;

@@ -1,5 +1,9 @@
-package drawing;
+package drawing.handlers;
 
+import drawing.observable.SelectionObservable;
+import drawing.observable.SelectionObserver;
+import drawing.shapes.IShape;
+import drawing.ui.DrawingPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;

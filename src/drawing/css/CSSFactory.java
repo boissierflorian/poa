@@ -1,5 +1,5 @@
 
-package drawing;
+package drawing.css;
 
 public class CSSFactory {
 

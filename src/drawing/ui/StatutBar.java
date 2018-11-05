@@ -1,5 +1,9 @@
-package drawing;
+package drawing.ui;
 
+import drawing.observable.Observable;
+import drawing.observable.Observer;
+import drawing.observable.SelectionObservable;
+import drawing.observable.SelectionObserver;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 

@@ -1,10 +1,11 @@
-package drawing;
+package drawing.handlers;
 
+import drawing.ui.DrawingPane;
+import drawing.shapes.IShape;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Shape;
 
 /**
  * Created by lewandowski on 20/12/2017.

@@ -1,4 +1,4 @@
-package drawing;
+package drawing.observable;
 
 public interface Observable {
     void addObserver(Observer obs);
