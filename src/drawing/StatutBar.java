@@ -3,11 +3,13 @@ package drawing;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class StatutBar extends HBox implements Observer {
+public class StatutBar extends HBox implements Observer, SelectionObserver {
     private Label label;
+    private int shapeCount;
+    private int selectedShapeCount;
 
     public StatutBar() {
-        label = new Label("0 Shape(s)");
+        label = new Label("0 Shape(s), 0 selected");
         this.getChildren().add(label);
     }
 
@@ -17,6 +19,17 @@ public class StatutBar extends HBox implements Observer {
 
     @Override
     public void update(Observable obs, int shapeCount) {
-        label.setText(String.format("%d Shape(s)", shapeCount));
+        this.shapeCount = shapeCount;
+        updateText();
+    }
+
+    @Override
+    public void update(SelectionObservable obs, int shapeCount) {
+        this.selectedShapeCount = shapeCount;
+        updateText();
+    }
+
+    public void updateText() {
+        label.setText(String.format("%d Shape(s), %d selected", shapeCount, selectedShapeCount));
     }
 }

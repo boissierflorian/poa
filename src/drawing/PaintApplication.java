@@ -69,6 +69,7 @@ public class PaintApplication extends Application {
         statutBar.setPadding(new Insets(10));
         statutBar.setSpacing(5.0);
         drawingPane.addObserver(statutBar);
+        drawingPane.getSelectionHandler().addObserver(statutBar);
         statutBar.getStyleClass().add("statutbar");
         root.setBottom(statutBar);
 

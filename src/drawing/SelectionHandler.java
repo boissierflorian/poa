@@ -14,12 +14,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SelectionHandler {
+public class SelectionHandler implements SelectionObservable {
 
     private DrawingPane drawingPane;
     private List<IShape> selectedShapes;
     private boolean majSelected;
     private EventHandler<MouseEvent> mouseEventHandler;
+    private List<SelectionObserver> selectionObservers;
 
 
     public SelectionHandler(DrawingPane drawingPane) {
@@ -29,6 +30,7 @@ public class SelectionHandler {
 
         selectedShapes = new ArrayList<>();
         majSelected = false;
+        selectionObservers = new ArrayList<>();
     }
 
 
@@ -51,6 +53,21 @@ public class SelectionHandler {
         });
 
         selectedShapes.clear();
+    }
+
+    @Override
+    public void addObserver(SelectionObserver obs) {
+        selectionObservers.add(obs);
+    }
+
+    @Override
+    public void removeObservers() {
+        selectionObservers.clear();
+    }
+
+    @Override
+    public void notifyObservers(int shapeCount) {
+        selectionObservers.forEach(c -> c.update(this, shapeCount));
     }
 
     private class MouseListener implements EventHandler<MouseEvent>  {
@@ -90,10 +107,16 @@ public class SelectionHandler {
                 if (notClickedOnAShape) {
                     clearSelection();
                 }
+
+                notifyObservers(selectedShapes.size());
             }
 
-            if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !majSelected) {
-                clearSelection();
+            if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
+                if (!majSelected) {
+                    clearSelection();
+                }
+                
+                notifyObservers(selectedShapes.size());
             }
         }
     }
