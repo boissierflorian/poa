@@ -43,4 +43,6 @@ public class ShapeAdapter implements IShape {
             shape.getStyleClass().add("selected");
         }
     }
+
+    public Shape getShape() { return shape; }
 }

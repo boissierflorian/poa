@@ -1,7 +1,7 @@
 package drawing;
 
 public interface SelectionObservable {
-    void addObserver(SelectionObserver obs);
-    void removeObservers();
-    void notifyObservers(int shapeCount);
+    void addSelectionObserver(SelectionObserver obs);
+    void removeSelectionObservers();
+    void notifySelectionToObservers(int shapeCount);
 }

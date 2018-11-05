@@ -27,6 +27,7 @@ public class PaintApplication extends Application {
     private Button rectangleButton;
     private Button circleButton;
     private Button triangleButton;
+    private Button delButton;
 
     private StatutBar statutBar;
 
@@ -58,8 +59,10 @@ public class PaintApplication extends Application {
         circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
         triangleButton = new Button("Triangle");
         triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
+        delButton = new Button("Delete");
+        delButton.setOnMouseClicked(mouseEvent -> drawingPane.removeSelectedShapes());
 
-        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton);
+        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton, delButton);
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");
@@ -68,8 +71,9 @@ public class PaintApplication extends Application {
         statutBar = new StatutBar();
         statutBar.setPadding(new Insets(10));
         statutBar.setSpacing(5.0);
-        drawingPane.addObserver(statutBar);
-        drawingPane.getSelectionHandler().addObserver(statutBar);
+        drawingPane.addObserver((Observer) statutBar);
+        drawingPane.addSelectionObserver((SelectionObserver) statutBar);
+        drawingPane.getSelectionHandler().addSelectionObserver(statutBar);
         statutBar.getStyleClass().add("statutbar");
         root.setBottom(statutBar);
 

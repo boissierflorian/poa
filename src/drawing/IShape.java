@@ -1,6 +1,7 @@
 package drawing;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 
 public interface IShape {
     void addShapeToPane(Pane pane);
@@ -12,4 +13,5 @@ public interface IShape {
     double getTranslateX();
 
     void setSelected(boolean selected);
+    Shape getShape();
 }

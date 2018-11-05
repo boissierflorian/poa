@@ -1,18 +1,12 @@
 package drawing;
 
 import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import org.w3c.dom.events.Event;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class SelectionHandler implements SelectionObservable {
 
@@ -56,17 +50,17 @@ public class SelectionHandler implements SelectionObservable {
     }
 
     @Override
-    public void addObserver(SelectionObserver obs) {
+    public void addSelectionObserver(SelectionObserver obs) {
         selectionObservers.add(obs);
     }
 
     @Override
-    public void removeObservers() {
+    public void removeSelectionObservers() {
         selectionObservers.clear();
     }
 
     @Override
-    public void notifyObservers(int shapeCount) {
+    public void notifySelectionToObservers(int shapeCount) {
         selectionObservers.forEach(c -> c.update(this, shapeCount));
     }
 
@@ -108,7 +102,7 @@ public class SelectionHandler implements SelectionObservable {
                     clearSelection();
                 }
 
-                notifyObservers(selectedShapes.size());
+                notifySelectionToObservers(selectedShapes.size());
             }
 
             if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
@@ -116,7 +110,7 @@ public class SelectionHandler implements SelectionObservable {
                     clearSelection();
                 }
                 
-                notifyObservers(selectedShapes.size());
+                notifySelectionToObservers(selectedShapes.size());
             }
         }
     }

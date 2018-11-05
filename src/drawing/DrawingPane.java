@@ -1,5 +1,6 @@
 package drawing;
 
+import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -10,17 +11,19 @@ import java.util.ArrayList;
 import java.lang.Iterable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by lewandowski on 20/12/2017.
  */
-public class DrawingPane extends Pane implements Iterable<IShape>, Observable {
+public class DrawingPane extends Pane implements Iterable<IShape>, Observable, SelectionObservable {
 
     private MouseMoveHandler mouseMoveHandler;
     private SelectionHandler selectionHandler;
 
     private ArrayList<IShape> shapes;
     private ArrayList<Observer> observers;
+    private ArrayList<SelectionObserver> selectionObservers;
 
     public DrawingPane() {
         clipChildren();
@@ -28,6 +31,7 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable {
         mouseMoveHandler = new MouseMoveHandler(this);
         selectionHandler = new SelectionHandler(this);
         observers = new ArrayList<>();
+        selectionObservers = new ArrayList<>();
     }
 
 
@@ -63,6 +67,17 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable {
         notifyObservers(this, shapes.size());
     }
 
+    public synchronized void removeSelectedShapes() {
+        shapes.removeAll(selectionHandler.getSelectedShapes());
+
+        this.getChildren().removeAll(selectionHandler.getSelectedShapes()
+                .stream().map(s -> s.getShape()).collect(Collectors.toList()));
+
+        selectionHandler.getSelectedShapes().clear();
+
+        notifySelectionToObservers(0);
+    }
+
     @Override
     public Iterator<IShape> iterator() {
         return shapes.iterator();
@@ -96,4 +111,19 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable {
     public List<IShape> getShapes() { return shapes; }
 
     public SelectionHandler getSelectionHandler() { return selectionHandler; }
+
+    @Override
+    public void addSelectionObserver(SelectionObserver obs) {
+        selectionObservers.add(obs);
+    }
+
+    @Override
+    public void removeSelectionObservers() {
+        selectionObservers.clear();
+    }
+
+    @Override
+    public void notifySelectionToObservers(int shapeCount) {
+        selectionObservers.forEach(s -> s.update(this, shapeCount));
+    }
 }
