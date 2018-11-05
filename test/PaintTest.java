@@ -1,4 +1,8 @@
+import drawing.IShape;
 import drawing.PaintApplication;
+import javafx.geometry.Point2D;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -30,7 +34,7 @@ public class PaintTest extends ApplicationTest {
                     app.getDrawingPane().addShape(new Ellipse(20, 20, 30, 30));
                 });
         Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Ellipse);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
 
@@ -46,7 +50,7 @@ public class PaintTest extends ApplicationTest {
 
         // then:
         Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Ellipse);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
 
@@ -61,7 +65,7 @@ public class PaintTest extends ApplicationTest {
 
         // then:
         Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Rectangle);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
 
@@ -76,7 +80,7 @@ public class PaintTest extends ApplicationTest {
 
         // then:
         Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Polygon);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
 
@@ -97,4 +101,17 @@ public class PaintTest extends ApplicationTest {
         assertFalse(app.getDrawingPane().iterator().hasNext());
     }
 
+    @Test
+    public void should_be_valid_selected_shape() {
+        // given:
+        assertEquals("0 Shape(s), 0 selected", app.getStatutBar().getText());
+
+        // when:
+        clickOn("Rectangle");
+        moveBy(30, 60).clickOn(MouseButton.PRIMARY).drag(MouseButton.PRIMARY);
+
+        // then:
+        assertEquals("1 Shape(s), 1 selected", app.getStatutBar().getText());
+        dropBy(50, 0);
+    }
 }

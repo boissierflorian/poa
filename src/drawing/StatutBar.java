@@ -17,6 +17,10 @@ public class StatutBar extends HBox implements Observer, SelectionObserver {
         label.setText(text);
     }
 
+    public String getText() {
+        return label.getText();
+    }
+
     @Override
     public void update(Observable obs, int shapeCount) {
         this.shapeCount = shapeCount;

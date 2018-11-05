@@ -82,6 +82,8 @@ public class PaintApplication extends Application {
         return drawingPane;
     }
 
+    public StatutBar getStatutBar() { return statutBar; }
+
     public static void main(String[] args) {
         launch(args);
     }
