@@ -6,6 +6,7 @@ import drawing.observable.Observable;
 import drawing.observable.Observer;
 import drawing.observable.SelectionObservable;
 import drawing.observable.SelectionObserver;
+import drawing.shapes.Group;
 import drawing.shapes.IShape;
 import drawing.shapes.ShapeAdapter;
 import javafx.scene.input.KeyEvent;
@@ -84,6 +85,29 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, S
 
         notifyObservers(this, shapes.size());
         notifySelectionToObservers(0);
+    }
+
+    public void removeShapes(List<IShape> shapesToRemove) {
+        shapes.removeAll(shapesToRemove);
+
+        this.getChildren().removeAll(shapesToRemove
+                .stream().map(s -> s.getShape()).collect(Collectors.toList()));
+
+        selectionHandler.getSelectedShapes().removeAll(shapesToRemove);
+        notifyObservers(this, shapes.size());
+        notifySelectionToObservers(0);
+    }
+
+    public void removeShape(IShape shape) {
+        shapes.remove(shape);
+        this.getChildren().remove(shape.getShape());
+
+        if (shape instanceof Group) {
+            ((Group) shape).getShapes().forEach(childShape -> removeShape(childShape));
+        }
+
+        notifyObservers(this, shapes.size());
+        notifySelectionToObservers(this.getSelectionHandler().getSelectedShapes().size());
     }
 
     @Override

@@ -15,6 +15,8 @@ public class ButtonFactory {
     public static final String TRIANGLE_BUTTON = "triangle";
     public static final String CIRCLE_BUTTON = "circle";
     public static final String DELETE_BUTTON = "delete";
+    public static final String GROUP_BUTTON = "group";
+    public static final String DESELECT_GROUP_BUTTON = "deselect_group";
 
     public static final int TEXT_ONLY = 0;
     public static final int ICONS_ONLY = 1;

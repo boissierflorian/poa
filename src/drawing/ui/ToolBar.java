@@ -1,8 +1,6 @@
 package drawing.ui;
 
-import drawing.handlers.EllipseButtonHandler;
-import drawing.handlers.RectangleButtonHandler;
-import drawing.handlers.TriangleButtonHandler;
+import drawing.handlers.*;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -15,6 +13,9 @@ public class ToolBar {
     private Button circleButton;
     private Button triangleButton;
     private Button delButton;
+    private Button groupButton;
+    private Button deselectGroupButton;
+
 
     public ToolBar(DrawingPane drawingPane) {
         ButtonFactory buttonFactory = new ButtonFactory(ButtonFactory.ICONS_ONLY);
@@ -29,11 +30,16 @@ public class ToolBar {
         triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
         delButton = buttonFactory.createButton(ButtonFactory.DELETE_BUTTON);
         delButton.setOnMouseClicked(mouseEvent -> drawingPane.removeSelectedShapes());
+        groupButton = buttonFactory.createButton(ButtonFactory.GROUP_BUTTON);
+        groupButton.setOnMouseClicked(new GroupButtonHandler(drawingPane));
+        deselectGroupButton = buttonFactory.createButton(ButtonFactory.DESELECT_GROUP_BUTTON);
+        deselectGroupButton.setOnMouseClicked(new DeselectGroupButtonHandler(drawingPane));
     }
 
     public HBox build() {
         HBox hBox = new HBox();
-        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton, delButton);
+        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton, delButton,
+                groupButton, deselectGroupButton);
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");
