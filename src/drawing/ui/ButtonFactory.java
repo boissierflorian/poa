@@ -1,5 +1,6 @@
 package drawing.ui;
 
+import drawing.utils.StringUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -42,7 +43,7 @@ public class ButtonFactory {
     }
 
     public  Button createButton(String buttonName) {
-        Button b = new Button(style == ICONS_ONLY ? "" : buttonName, style == ICONS_ONLY ? getImageView(buttonName) : null);
+        Button b = new Button(style == ICONS_ONLY ? "" : StringUtils.capitalizeFirstLetter(buttonName), style == ICONS_ONLY ? getImageView(buttonName) : null);
         b.setTooltip(new Tooltip(buttonName));
         return b;
     }

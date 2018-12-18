@@ -18,9 +18,10 @@ public class ToolBar {
 
 
     public ToolBar(DrawingPane drawingPane) {
-        ButtonFactory buttonFactory = new ButtonFactory(ButtonFactory.ICONS_ONLY);
+        ButtonFactory buttonFactory = new ButtonFactory(ButtonFactory.TEXT_ONLY);
 
         clearButton = buttonFactory.createButton(ButtonFactory.CLEAR_BUTTON);
+        clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(new ClearCommand(drawingPane)));
         clearButton.setOnAction(event -> drawingPane.clear());
         rectangleButton = buttonFactory.createButton(ButtonFactory.RECTANGLE_BUTTON);
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));

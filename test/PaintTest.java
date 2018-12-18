@@ -1,5 +1,6 @@
 import drawing.shapes.IShape;
 import drawing.ui.PaintApplication;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
@@ -109,5 +110,16 @@ public class PaintTest extends ApplicationTest {
         // then:
         assertEquals("1 Shape(s), 1 selected", app.getStatutBar().getText());
         dropBy(50, 0);
+    }
+
+    @Test
+    public void should_be_grouped() {
+        // when:
+        clickOn("Rectangle");
+        moveBy(30, 60).clickOn(MouseButton.PRIMARY).drag(MouseButton.PRIMARY);
+        push(KeyCode.SHIFT);
+        dropBy(50, 0);
+        clickOn("Circle");
+        moveBy(30, 60).clickOn(MouseButton.PRIMARY).drag(MouseButton.PRIMARY);
     }
 }
